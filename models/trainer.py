@@ -1,19 +1,25 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+
 
 class ModelTrainer:
     def __init__(self):
-        self.model = RandomForestClassifier(n_estimators=100, class_weight="balanced")
-        self.features = ["Returns", "MA_20", "MA_50", "RSI", "MACD"]
+        # self.model = RandomForestClassifier(n_estimators=500, class_weight="balanced", random_state=42)
+        self.model = XGBClassifier(n_estimators=100, random_state=42, eval_metric="logloss")
+
+        self.features = ["Returns", "RSI", "MACD", "MA_cross", "Price_MA20_dist", "RSI_lag1", "RSI_lag2", "MACD_lag1", "MACD_lag2"]
 
     def split_data(self, df):
         X = df[self.features]
         y = df["Target"]
 
         split = int(len(X) * 0.8)
+        X_train, X_test = X[:split], X[split:]
+        y_train, y_test = y[:split], y[split:]
 
-        X_train, X_test, y_train, y_test  = train_test_split(X,y, train_size=0.80)
+        #X_train, X_test, y_train, y_test  = train_test_split(X,y, train_size=0.80,shuffle=False)
        
 
         return X_train, X_test, y_train, y_test
