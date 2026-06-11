@@ -30,6 +30,8 @@ The strategy was tested on Apple stock (AAPL) over a 5-year historical period, u
 **Performance over the test period (excluding transaction fees):**
 - **ML Strategy Return:** ~ +20%
 - **Market Return (Buy & Hold):** ~ +45%
+### Performance Chart
+![Backtest Strategy vs Market](Results.webp)
 
 **Analysis of Results:**
 The backtest successfully validates the technical functionality of the pipeline. The strategy proves to be profitable (no capital loss) and successfully avoids certain downtrends by exiting the market. However, it underperforms the benchmark index. Graphical analysis reveals that the model behaves too cautiously: false negative signals trigger market exits during strong bullish phases
